@@ -67,7 +67,7 @@ export default class PointsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { city, uf, items } = request.query;
+    const { uf, city, items } = request.query;
 
     const parsedItems = String(items)
       .split(',')

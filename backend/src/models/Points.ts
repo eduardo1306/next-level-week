@@ -26,16 +26,16 @@ export default class Points {
   @Column()
   whatsapp: string;
 
-  @Column('decimal')
+  @Column()
   latitude: number;
 
-  @Column('decimal')
+  @Column()
   longitude: number;
 
   @Column()
   city: string;
 
-  @Column({ length: 2 })
+  @Column()
   uf: string;
 
   @CreateDateColumn()

@@ -31,11 +31,11 @@ export default class CreatePoints1591144696212 implements MigrationInterface {
           },
           {
             name: 'latitude',
-            type: 'decimal',
+            type: 'real',
           },
           {
             name: 'longitude',
-            type: 'decimal',
+            type: 'real',
           },
           {
             name: 'city',
@@ -44,6 +44,7 @@ export default class CreatePoints1591144696212 implements MigrationInterface {
           {
             name: 'uf',
             type: 'varchar',
+            length: '2',
           },
           {
             name: 'created_at',

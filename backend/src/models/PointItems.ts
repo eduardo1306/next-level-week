@@ -2,7 +2,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   Column,
 } from 'typeorm';
 
@@ -14,11 +14,11 @@ export default class PointItems {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Items)
+  @ManyToOne(() => Items)
   @JoinColumn({ name: 'item_id' })
   items: Items;
 
-  @OneToOne(() => Points)
+  @ManyToOne(() => Points)
   @JoinColumn({ name: 'point_id' })
   points: Points;
 
