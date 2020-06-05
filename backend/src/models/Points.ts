@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+
+import PointItems from './PointItems';
 
 @Entity('points')
 export default class Points {
@@ -40,4 +43,9 @@ export default class Points {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => PointItems, pointItems => pointItems.points, {
+    cascade: ['insert'],
+  })
+  pointItems: PointItems[];
 }

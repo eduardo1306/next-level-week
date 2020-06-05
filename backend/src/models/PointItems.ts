@@ -4,8 +4,6 @@ import {
   JoinColumn,
   OneToOne,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
 import Points from './Points';
@@ -29,10 +27,4 @@ export default class PointItems {
 
   @Column()
   point_id: number;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }
