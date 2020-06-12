@@ -19,7 +19,10 @@ export default class PointsController {
 
     const pointsRepository = getRepository(Points);
 
-    const pointItems = items.map((item: number) => {
+    const pointItems = items
+      .split(',')
+      .map((item: string) => Number(item.trim()))
+      .map((item: number) => {
       return {
         item_id: item,
       };
@@ -33,7 +36,7 @@ export default class PointsController {
       longitude,
       city,
       uf,
-      image,
+      image: request.file.filename,
       pointItems,
     });
 
@@ -55,6 +58,11 @@ export default class PointsController {
       return response.status(400).json({ message: 'Point not foind' });
     }
 
+    const serializedPoints = {
+      ...point,
+      image_url: `http://192.168.0.105:3333/uploads/${point.image}`
+    }
+
     const items = point.pointItems.map(pointItem => {
       return {
         title: pointItem.items.title,
@@ -63,7 +71,7 @@ export default class PointsController {
 
     delete point.pointItems;
 
-    return response.json({ point, items });
+    return response.json({ point: serializedPoints, items });
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -82,6 +90,13 @@ export default class PointsController {
       .andWhere('points.city = :city', { city })
       .andWhere('pointItems.item_id IN (:...items)', { items: parsedItems })
       .getMany();
+
+    const serializedPoints = points.map(point => {
+      return {
+        ...point,
+        image_url: `http://192.168.0.105:3333/uploads/${point.image}`
+      }
+    })
 
     return response.json(points);
   }
